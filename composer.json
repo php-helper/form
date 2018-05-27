@@ -1,0 +1,23 @@
+{
+    "name": "php-helper/form",
+    "authors": [
+        {
+            "name": "Oleg G.",
+            "email": "OlegGin@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {
+            "PhpHelper\\Form\\": "src"
+        }
+    },
+    "require": {
+        "php": "^7.2",
+        "zendframework/zend-diactoros": "^1.7",
+        "myclabs/php-enum": "^1.5"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7.1"
+    }
+}
