@@ -6,9 +6,9 @@
  * Time: 11:22
  */
 
-namespace PhpExt\Form\Tags;
+namespace PhpHelper\Form\Tags;
 
-use PhpExt\Form\Enums\AttrEnum;
+use PhpHelper\Form\Enums\AttrEnum;
 
 class BaseTag implements TagInterface
 {

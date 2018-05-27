@@ -6,7 +6,7 @@
  * Time: 11:52
  */
 
-namespace PhpExt\Form\Tags;
+namespace PhpHelper\Form\Tags;
 
 trait TextTrait
 {

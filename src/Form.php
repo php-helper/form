@@ -6,7 +6,7 @@
  * Time: 10:34
  */
 
-namespace PhpExt\Form;
+namespace PhpHelper\Form;
 
 class Form
 {

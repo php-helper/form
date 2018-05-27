@@ -6,7 +6,7 @@
  * Time: 11:19
  */
 
-namespace PhpExt\Form\Enums;
+namespace PhpHelper\Form\Enums;
 
 use MyCLabs\Enum\Enum;
 

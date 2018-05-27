@@ -6,9 +6,9 @@
  * Time: 14:11
  */
 
-namespace PhpExt\Form\Tags;
+namespace PhpHelper\Form\Tags;
 
-use PhpExt\Form\Enums\FormEnum;
+use PhpHelper\Form\Enums\FormEnum;
 
 class FormOpen extends BaseTag implements TagInterface
 {

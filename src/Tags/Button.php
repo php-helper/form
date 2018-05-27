@@ -6,9 +6,9 @@
  * Time: 14:45
  */
 
-namespace PhpExt\Form\Tags;
+namespace PhpHelper\Form\Tags;
 
-use PhpExt\Form\Enums\ButtonEnum;
+use PhpHelper\Form\Enums\ButtonEnum;
 
 class Button extends ExtendedTag
 {

@@ -6,20 +6,20 @@
  * Time: 10:34
  */
 
-namespace PhpExt\Form;
+namespace PhpHelper\Form;
 
-use PhpExt\Form\Enums\ButtonEnum;
-use PhpExt\Form\Enums\FormEnum;
-use PhpExt\Form\Enums\InputEnum;
-use PhpExt\Form\Tags\Button;
-use PhpExt\Form\Tags\Checkbox;
-use PhpExt\Form\Tags\FormClose;
-use PhpExt\Form\Tags\FormOpen;
-use PhpExt\Form\Tags\Input;
-use PhpExt\Form\Tags\Label;
-use PhpExt\Form\Tags\Radio;
-use PhpExt\Form\Tags\RadioGroup;
-use PhpExt\Form\Tags\TextArea;
+use PhpHelper\Form\Enums\ButtonEnum;
+use PhpHelper\Form\Enums\FormEnum;
+use PhpHelper\Form\Enums\InputEnum;
+use PhpHelper\Form\Tags\Button;
+use PhpHelper\Form\Tags\Checkbox;
+use PhpHelper\Form\Tags\FormClose;
+use PhpHelper\Form\Tags\FormOpen;
+use PhpHelper\Form\Tags\Input;
+use PhpHelper\Form\Tags\Label;
+use PhpHelper\Form\Tags\Radio;
+use PhpHelper\Form\Tags\RadioGroup;
+use PhpHelper\Form\Tags\TextArea;
 use Zend\Diactoros\ServerRequest;
 
 class FormComponents

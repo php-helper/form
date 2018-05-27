@@ -6,7 +6,7 @@
  * Time: 11:50
  */
 
-namespace PhpExt\Form\Tags;
+namespace PhpHelper\Form\Tags;
 
 class BaseClosedTag implements TagInterface
 {

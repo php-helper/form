@@ -6,7 +6,7 @@
  * Time: 12:27
  */
 
-namespace PhpExt\Form\Enums;
+namespace PhpHelper\Form\Enums;
 
 class InputEnum extends AttrEnum
 {

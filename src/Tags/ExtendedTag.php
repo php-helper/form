@@ -6,9 +6,9 @@
  * Time: 19:31
  */
 
-namespace PhpExt\Form\Tags;
+namespace PhpHelper\Form\Tags;
 
-use PhpExt\Form\Enums\InputEnum;
+use PhpHelper\Form\Enums\InputEnum;
 
 class ExtendedTag extends BaseTag implements TagInterface
 {

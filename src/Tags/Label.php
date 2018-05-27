@@ -6,9 +6,9 @@
  * Time: 21:35
  */
 
-namespace PhpExt\Form\Tags;
+namespace PhpHelper\Form\Tags;
 
-use PhpExt\Form\Enums\LabelEnum;
+use PhpHelper\Form\Enums\LabelEnum;
 
 class Label extends BaseTag implements TagInterface
 {

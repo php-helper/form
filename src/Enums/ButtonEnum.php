@@ -6,7 +6,7 @@
  * Time: 11:42
  */
 
-namespace PhpExt\Form\Enums;
+namespace PhpHelper\Form\Enums;
 
 class ButtonEnum
 {

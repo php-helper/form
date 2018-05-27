@@ -6,9 +6,9 @@
  * Time: 15:40
  */
 
-namespace PhpExt\Form\Tags;
+namespace PhpHelper\Form\Tags;
 
-use PhpExt\Form\Enums\TextAreaEnum;
+use PhpHelper\Form\Enums\TextAreaEnum;
 
 class TextArea extends ExtendedTag
 {

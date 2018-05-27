@@ -6,7 +6,7 @@
  * Time: 12:08
  */
 
-namespace PhpExt\Form\Enums;
+namespace PhpHelper\Form\Enums;
 
 class TextAreaEnum extends AttrEnum
 {

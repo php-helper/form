@@ -6,7 +6,7 @@
  * Time: 11:33
  */
 
-namespace PhpExt\Form\Tags;
+namespace PhpHelper\Form\Tags;
 
 interface TagInterface
 {

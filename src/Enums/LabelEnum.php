@@ -6,7 +6,7 @@
  * Time: 11:23
  */
 
-namespace PhpExt\Form\Enums;
+namespace PhpHelper\Form\Enums;
 
 class LabelEnum extends AttrEnum
 {
