@@ -21,6 +21,7 @@ use PhpHelper\Form\Tags\Input;
 use PhpHelper\Form\Tags\Label;
 use PhpHelper\Form\Tags\Radio;
 use PhpHelper\Form\Tags\RadioGroup;
+use PhpHelper\Form\Tags\Select;
 use PhpHelper\Form\Tags\TagInterface;
 use PhpHelper\Form\Tags\TextArea;
 use Zend\Diactoros\ServerRequest;
