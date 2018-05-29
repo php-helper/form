@@ -28,8 +28,26 @@ class TextArea extends ExtendedTag
         return $this->getAttribute(TextAreaEnum::ATTR_NAME);
     }
 
+    protected function bindValue(): void
+    {
+        if ($this->isSkipBind()) {
+            return;
+        }
+
+        if (isset($this->data[$this->getName()])) {
+            $this->setText($this->data[$this->getName()]);
+        }
+    }
+
     public function build(): string
     {
-        return sprintf('<%s%s>%s</%s>', $this->tagName, $this->attributesToString(), $this->text, $this->tagName);
+        $this->bindValue();
+        return sprintf(
+            '<%s%s>%s</%s>',
+            $this->tagName,
+            $this->attributesToString(),
+            $this->getText(),
+            $this->tagName
+        );
     }
 }

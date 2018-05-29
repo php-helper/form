@@ -13,7 +13,7 @@ use PhpHelper\Form\Enums\InputEnum;
 class ExtendedTag extends BaseTag implements TagInterface
 {
     protected $data;
-    protected $isBindValue = false;
+    protected $skipBind = false;
 
     public function setName($name)
     {
@@ -26,25 +26,14 @@ class ExtendedTag extends BaseTag implements TagInterface
         return $this->getAttribute(InputEnum::ATTR_NAME);
     }
 
-    public function setValue($value)
-    {
-        $this->setAttribute(InputEnum::ATTR_VALUE, $value);
-        return $this;
-    }
-
-    public function getValue()
-    {
-        return $this->getAttribute(InputEnum::ATTR_VALUE);
-    }
-
     public function isSkipBind(): bool
     {
-        return $this->isBindValue;
+        return $this->skipBind;
     }
 
-    public function skipBind(bool $isBindValue)
+    public function skipBind(bool $skipBind)
     {
-        $this->isBindValue = $isBindValue;
+        $this->skipBind = $skipBind;
         return $this;
     }
 
@@ -58,20 +47,19 @@ class ExtendedTag extends BaseTag implements TagInterface
         return $this;
     }
 
-    protected function bindValue(): void
+    /**
+     * @return mixed
+     */
+    public function getData()
     {
-        if ($this->isSkipBind()) {
-            return;
-        }
-
-        if (isset($this->data[$this->getName()])) {
-            $this->attributes[InputEnum::ATTR_VALUE] = $this->data[$this->getName()];
-        }
+        return $this->data;
     }
 
-    public function build(): string
+    /**
+     * @return mixed
+     */
+    public function getTagData()
     {
-        $this->bindValue();
-        return parent::build();
+        return $this->data[$this->getName()] ?? null;
     }
 }

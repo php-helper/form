@@ -16,6 +16,17 @@ class Input extends ExtendedTag implements TagInterface
 
     protected $tagName = 'input';
 
+    public function setValue($value)
+    {
+        $this->setAttribute(InputEnum::ATTR_VALUE, $value);
+        return $this;
+    }
+
+    public function getValue()
+    {
+        return $this->getAttribute(InputEnum::ATTR_VALUE);
+    }
+
     public function setType($type)
     {
         $this->setAttribute(InputEnum::ATTR_TYPE, $type);
@@ -47,5 +58,22 @@ class Input extends ExtendedTag implements TagInterface
     public function getPlaceholder()
     {
         return $this->getAttribute(InputEnum::ATTR_PLACEHOLDER);
+    }
+
+    protected function bindValue(): void
+    {
+        if ($this->isSkipBind()) {
+            return;
+        }
+
+        if (isset($this->data[$this->getName()])) {
+            $this->attributes[InputEnum::ATTR_VALUE] = $this->data[$this->getName()];
+        }
+    }
+
+    public function build(): string
+    {
+        $this->bindValue();
+        return parent::build();
     }
 }

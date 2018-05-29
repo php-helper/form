@@ -8,10 +8,10 @@
 
 namespace PhpHelper\Form;
 
-class Form
+class Form implements FormInterface
 {
     /**
-     * @param mixed $data
+     * @param mixed[] $data
      * @return FormBuilder
      */
     public function createFormBuilder($data = []): FormBuilder
