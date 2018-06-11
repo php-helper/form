@@ -24,6 +24,7 @@ use PhpHelper\Form\Tags\RadioGroup;
 use PhpHelper\Form\Tags\Select;
 use PhpHelper\Form\Tags\TagInterface;
 use PhpHelper\Form\Tags\TextArea;
+use PhpHelper\Validator\Validator;
 use Zend\Diactoros\ServerRequest;
 
 class FormBuilder implements ArrayAccess
@@ -35,6 +36,8 @@ class FormBuilder implements ArrayAccess
     protected $tags;
     /** @var mixed[] */
     protected $data = [];
+    /** @var Validator */
+    protected $validator;
 
     /**
      * @param mixed $data
@@ -46,6 +49,7 @@ class FormBuilder implements ArrayAccess
         } else {
             $this->data = $data;
         }
+        $this->validator = new Validator();
     }
 
     public function getData()
@@ -55,7 +59,7 @@ class FormBuilder implements ArrayAccess
 
     private function addInputTypeTag(string $name, string $inputType, string $labelText = ''): Input
     {
-        $object = new Input();
+        $object = new Input($this->validator);
         $object->setName($name)
             ->setType($inputType)
             ->setData($this->data)
@@ -263,5 +267,18 @@ class FormBuilder implements ArrayAccess
         $this->storeTag($name, $object);
 
         return $object;
+    }
+
+    public function validate(array $data)
+    {
+        $this->validator->validate($this->data);
+    }
+
+    /**
+     * @return Validator
+     */
+    public function getValidator(): Validator
+    {
+        return $this->validator;
     }
 }

@@ -9,12 +9,19 @@
 namespace PhpHelper\Form\Tags;
 
 use PhpHelper\Form\Enums\InputEnum;
+use PhpHelper\Validator\Validator;
 
 class Input extends ExtendedTag implements TagInterface
 {
     use LabelTrait;
 
     protected $tagName = 'input';
+    protected $validator;
+
+    public function __construct(Validator $validator)
+    {
+        $this->validator = $validator;
+    }
 
     public function setValue($value)
     {
@@ -75,5 +82,10 @@ class Input extends ExtendedTag implements TagInterface
     {
         $this->bindValue();
         return parent::build();
+    }
+
+    public function addRule()
+    {
+        return $this->validator->addRule($this->getName());
     }
 }
