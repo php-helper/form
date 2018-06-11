@@ -184,7 +184,7 @@ class FormBuilder implements ArrayAccess
 
     public function checkbox(string $name, string $labelText = ''): Checkbox
     {
-        $object = new Checkbox();
+        $object = new Checkbox($this->validator);
         $object->setData($this->data)->setName($name)->label($labelText);
         $this->storeTag($name, $object);
 

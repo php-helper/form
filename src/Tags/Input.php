@@ -21,6 +21,7 @@ class Input extends ExtendedTag implements TagInterface
     public function __construct(Validator $validator)
     {
         $this->validator = $validator;
+        $this->bindValue();
     }
 
     public function setValue($value)
@@ -76,12 +77,6 @@ class Input extends ExtendedTag implements TagInterface
         if (isset($this->data[$this->getName()])) {
             $this->attributes[InputEnum::ATTR_VALUE] = $this->data[$this->getName()];
         }
-    }
-
-    public function build(): string
-    {
-        $this->bindValue();
-        return parent::build();
     }
 
     public function addRule()

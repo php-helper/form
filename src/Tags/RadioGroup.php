@@ -9,14 +9,16 @@
 namespace PhpHelper\Form\Tags;
 
 use PhpHelper\Form\Enums\InputEnum;
+use PhpHelper\Validator\Validator;
 
 class RadioGroup extends Input
 {
     private $radios = [];
 
-    public function __construct()
+    public function __construct(Validator $validator)
     {
         $this->setType(InputEnum::TYPE_RADIO);
+        parent::__construct($validator);
     }
 
     public function addRadio()

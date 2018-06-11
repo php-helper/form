@@ -9,11 +9,13 @@
 namespace PhpHelper\Form\Tags;
 
 use PhpHelper\Form\Enums\InputEnum;
+use PhpHelper\Validator\Validator;
 
 class Radio extends BaseCheckedInput
 {
-    public function __construct()
+    public function __construct(Validator $validator)
     {
         $this->setType(InputEnum::TYPE_RADIO);
+        parent::__construct($validator);
     }
 }
