@@ -15,6 +15,8 @@ use PhpHelper\Form\Enums\FormEnum;
 use PhpHelper\Form\Enums\InputEnum;
 use PhpHelper\Form\Tags\Button;
 use PhpHelper\Form\Tags\Checkbox;
+use PhpHelper\Form\Tags\CheckGroup;
+use PhpHelper\Form\Tags\Group;
 use PhpHelper\Form\Tags\FormClose;
 use PhpHelper\Form\Tags\FormOpen;
 use PhpHelper\Form\Tags\Input;
@@ -24,10 +26,9 @@ use PhpHelper\Form\Tags\RadioGroup;
 use PhpHelper\Form\Tags\Select;
 use PhpHelper\Form\Tags\TagInterface;
 use PhpHelper\Form\Tags\TextArea;
-use PhpHelper\Validator\Validator;
 use Zend\Diactoros\ServerRequest;
 
-class FormBuilder implements ArrayAccess
+class FormBuilder implements FormBuilderInterface, ArrayAccess
 {
     const FORM_OPEN_KEY = 'open';
     const FORM_CLOSE_KEY = 'close';
@@ -36,20 +37,22 @@ class FormBuilder implements ArrayAccess
     protected $tags;
     /** @var mixed[] */
     protected $data = [];
-    /** @var Validator */
-    protected $validator;
 
     /**
-     * @param mixed $data
+     * @param mixed[] $data
      */
     public function __construct($data = [])
+    {
+        $this->setData($data);
+    }
+
+    protected function setData($data = [])
     {
         if ($data instanceof ServerRequest) {
             $this->data = $data->getParsedBody();
         } else {
             $this->data = $data;
         }
-        $this->validator = new Validator();
     }
 
     public function getData()
@@ -59,10 +62,10 @@ class FormBuilder implements ArrayAccess
 
     private function addInputTypeTag(string $name, string $inputType, string $labelText = ''): Input
     {
-        $object = new Input($this->validator);
-        $object->setName($name)
+        $object = new Input();
+        $object->setData($this->data)
+            ->setName($name)
             ->setType($inputType)
-            ->setData($this->data)
             ->label($labelText);
         $this->storeTag($name, $object);
 
@@ -144,12 +147,12 @@ class FormBuilder implements ArrayAccess
         unset($this->tags[$offset]);
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->build();
     }
 
-    public function build()
+    public function build(): string
     {
         $tags = '';
         foreach ($this->tags as $tag) {
@@ -184,8 +187,10 @@ class FormBuilder implements ArrayAccess
 
     public function checkbox(string $name, string $labelText = ''): Checkbox
     {
-        $object = new Checkbox($this->validator);
-        $object->setData($this->data)->setName($name)->label($labelText);
+        $object = new Checkbox();
+        $object->setData($this->data)
+            ->setName($name)
+            ->label($labelText);
         $this->storeTag($name, $object);
 
         return $object;
@@ -194,16 +199,27 @@ class FormBuilder implements ArrayAccess
     public function radio(string $name, string $labelText = ''): Radio
     {
         $object = new Radio();
-        $object->setData($this->data)->setName($name)->label($labelText);
+        $object->setData($this->data)
+            ->setName($name)
+            ->label($labelText);
         $this->storeTag($name, $object);
 
         return $object;
     }
 
-    public function radioGroup(string $name, string $labelText = ''): RadioGroup
+    public function radioGroup(string $name): RadioGroup
     {
-        $object = new RadioGroup();
-        $object->setData($this->data)->setName($name)->label($labelText);
+        $object = new RadioGroup($name);
+        $object->setData($this->getData());
+        $this->storeTag($name, $object);
+
+        return $object;
+    }
+
+    public function checkGroup(string $name): CheckGroup
+    {
+        $object = new CheckGroup($name);
+        $object->setData($this->getData());
         $this->storeTag($name, $object);
 
         return $object;
@@ -231,7 +247,8 @@ class FormBuilder implements ArrayAccess
     public function textArea(string $name): TextArea
     {
         $object = new TextArea();
-        $object->setData($this->data)->setName($name);
+        $object->setData($this->data)
+            ->setName($name);
         $this->storeTag($name, $object);
 
         return $object;
@@ -252,8 +269,8 @@ class FormBuilder implements ArrayAccess
     public function select(string $name): Select
     {
         $object = new Select();
-        $object->setName($name)
-            ->setData($this->getData());
+        $object->setData($this->getData())
+            ->setName($name);
         $this->storeTag($name, $object);
 
         return $object;
@@ -262,23 +279,10 @@ class FormBuilder implements ArrayAccess
     public function button(string $name): Button
     {
         $object = new Button();
-        $object->setName($name)
-            ->setData($this->getData());
+        $object->setData($this->getData())
+            ->setName($name);
         $this->storeTag($name, $object);
 
         return $object;
-    }
-
-    public function validate(array $data)
-    {
-        $this->validator->validate($this->data);
-    }
-
-    /**
-     * @return Validator
-     */
-    public function getValidator(): Validator
-    {
-        return $this->validator;
     }
 }

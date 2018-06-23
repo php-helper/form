@@ -10,8 +10,20 @@ namespace PhpHelper\Form\Tags;
 
 use PhpHelper\Form\Enums\InputEnum;
 
-class BaseCheckedInput extends Input
+class BaseCheckInput extends Input
 {
+    public function setValue($value)
+    {
+        $this->setAttribute(InputEnum::ATTR_VALUE, $value);
+        $this->bindValue();
+        return $this;
+    }
+
+    public function getValue()
+    {
+        return $this->getAttribute(InputEnum::ATTR_VALUE);
+    }
+
     public function setChecked(bool $checked)
     {
         if ($checked) {
@@ -34,6 +46,11 @@ class BaseCheckedInput extends Input
             return;
         }
 
-        $this->setChecked(isset($this->data[$this->getName()]));
+        $tagData = $this->getTagData();
+        if (is_array($tagData)) {
+            $this->setChecked(in_array($this->getValue(), $tagData));
+        } else {
+            $this->setChecked($tagData == $this->getValue());
+        }
     }
 }

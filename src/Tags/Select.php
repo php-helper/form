@@ -8,10 +8,6 @@
 
 namespace PhpHelper\Form\Tags;
 
-use PhpHelper\Form\Tags\ExtendedTag;
-use PhpHelper\Form\Tags\LabelTrait;
-use PhpHelper\Form\Tags\TagInterface;
-
 class Select extends ExtendedTag implements TagInterface
 {
     use LabelTrait;
@@ -49,7 +45,8 @@ class Select extends ExtendedTag implements TagInterface
     }
 
     /**
-     * @param array $disabledItems
+     * @param mixed[] $disabledItems
+     * @return Select
      */
     public function setDisabledItems(array $disabledItems): Select
     {

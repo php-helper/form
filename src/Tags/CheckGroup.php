@@ -2,16 +2,16 @@
 /**
  * Created by PhpStorm.
  * User: Oleg G.
- * Date: 03.01.2018
- * Time: 12:09
+ * Date: 23.06.2018
+ * Time: 15:41
  */
 
 namespace PhpHelper\Form\Tags;
 
-class RadioGroup extends BaseGroup
+class CheckGroup extends BaseGroup
 {
     public function __construct(string $name)
     {
-        parent::__construct(Radio::class, $name);
+        parent::__construct(Checkbox::class, $name);
     }
 }

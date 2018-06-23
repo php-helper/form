@@ -9,14 +9,13 @@
 namespace PhpHelper\Form\Tags;
 
 use PhpHelper\Form\Enums\InputEnum;
-use PhpHelper\Validator\Validator;
 
-class Checkbox extends BaseCheckedInput
+class Checkbox extends BaseCheckInput
 {
-    public function __construct(Validator $validator)
+    public function __construct()
     {
         $this->setType(InputEnum::TYPE_CHECKBOX);
-        $this->setValue(1);
-        parent::__construct($validator);
+        $this->setDefaultValue(1);
+        parent::__construct();
     }
 }

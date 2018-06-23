@@ -16,11 +16,9 @@ class TextArea extends ExtendedTag
     use LabelTrait;
 
     protected $tagName = 'textarea';
-    protected $validator;
 
-    public function __construct(Validator $validator)
+    public function __construct()
     {
-        $this->validator = $validator;
         $this->bindValue();
     }
 
@@ -55,10 +53,5 @@ class TextArea extends ExtendedTag
             $this->getText(),
             $this->tagName
         );
-    }
-
-    public function addRule()
-    {
-        return $this->validator->addRule($this->getName());
     }
 }

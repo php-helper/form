@@ -10,5 +10,5 @@ namespace PhpHelper\Form;
 
 interface FormInterface
 {
-    public function createFormBuilder($data = []): FormBuilder;
+    public function createFormBuilder($data = []): FormBuilderInterface;
 }

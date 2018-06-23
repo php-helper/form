@@ -9,30 +9,15 @@
 namespace PhpHelper\Form\Tags;
 
 use PhpHelper\Form\Enums\InputEnum;
-use PhpHelper\Validator\Validator;
 
 class Input extends ExtendedTag implements TagInterface
 {
     use LabelTrait;
 
     protected $tagName = 'input';
-    protected $validator;
 
-    public function __construct(Validator $validator)
+    public function __construct()
     {
-        $this->validator = $validator;
-        $this->bindValue();
-    }
-
-    public function setValue($value)
-    {
-        $this->setAttribute(InputEnum::ATTR_VALUE, $value);
-        return $this;
-    }
-
-    public function getValue()
-    {
-        return $this->getAttribute(InputEnum::ATTR_VALUE);
     }
 
     public function setType($type)
@@ -66,21 +51,5 @@ class Input extends ExtendedTag implements TagInterface
     public function getPlaceholder()
     {
         return $this->getAttribute(InputEnum::ATTR_PLACEHOLDER);
-    }
-
-    protected function bindValue(): void
-    {
-        if ($this->isSkipBind()) {
-            return;
-        }
-
-        if (isset($this->data[$this->getName()])) {
-            $this->attributes[InputEnum::ATTR_VALUE] = $this->data[$this->getName()];
-        }
-    }
-
-    public function addRule()
-    {
-        return $this->validator->addRule($this->getName());
     }
 }

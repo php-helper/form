@@ -14,7 +14,7 @@ class Form implements FormInterface
      * @param mixed[] $data
      * @return FormBuilder
      */
-    public function createFormBuilder($data = []): FormBuilder
+    public function createFormBuilder($data = []): FormBuilderInterface
     {
         $formBuilder = new FormBuilder($data);
 

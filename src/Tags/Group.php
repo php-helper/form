@@ -2,19 +2,18 @@
 /**
  * Created by PhpStorm.
  * User: Oleg G.
- * Date: 03.01.2018
- * Time: 12:09
+ * Date: 23.06.2018
+ * Time: 15:31
  */
 
 namespace PhpHelper\Form\Tags;
 
 use PhpHelper\Form\Enums\InputEnum;
 
-class Radio extends BaseCheckInput
+class Group extends BaseGroup
 {
     public function __construct()
     {
-        $this->setType(InputEnum::TYPE_RADIO);
-        parent::__construct();
+        parent::__construct(InputEnum::TYPE_CHECKBOX);
     }
 }
