@@ -15,7 +15,6 @@ class BaseCheckInput extends Input
     public function setValue($value)
     {
         $this->setAttribute(InputEnum::ATTR_VALUE, $value);
-        $this->bindValue();
         return $this;
     }
 
@@ -26,11 +25,10 @@ class BaseCheckInput extends Input
 
     public function setChecked(bool $checked)
     {
-        if ($checked) {
-            $this->setAttribute(InputEnum::ATTR_CHECKED, InputEnum::ATTR_CHECKED);
-        } else {
-            $this->removeAttribute(InputEnum::ATTR_CHECKED);
+        if (!empty($this->getData())) {
+            return $this;
         }
+        $this->setCheckedAttribute($checked);
 
         return $this;
     }
@@ -42,15 +40,31 @@ class BaseCheckInput extends Input
 
     protected function bindValue(): void
     {
+        if ($this->getValue() === '' && !is_null($this->defaultValue)) {
+            $this->attributes[InputEnum::ATTR_VALUE] = $this->defaultValue;
+        }
+
         if ($this->isSkipBind()) {
             return;
         }
 
-        $tagData = $this->getTagData();
-        if (is_array($tagData)) {
-            $this->setChecked(in_array($this->getValue(), $tagData));
-        } else {
-            $this->setChecked($tagData == $this->getValue());
+        if (!is_null($tagData = $this->getTagData())) {
+            if (is_array($tagData)) {
+                $this->setCheckedAttribute(in_array($this->getValue(), $tagData));
+            } else {
+                $this->setCheckedAttribute($tagData == $this->getValue());
+            }
         }
+    }
+
+    private function setCheckedAttribute(bool $checked)
+    {
+        if ($checked) {
+            $this->setAttribute(InputEnum::ATTR_CHECKED, InputEnum::ATTR_CHECKED);
+        } else {
+            $this->removeAttribute(InputEnum::ATTR_CHECKED);
+        }
+
+        return $this;
     }
 }

@@ -16,7 +16,6 @@ use PhpHelper\Form\Enums\InputEnum;
 use PhpHelper\Form\Tags\Button;
 use PhpHelper\Form\Tags\Checkbox;
 use PhpHelper\Form\Tags\CheckGroup;
-use PhpHelper\Form\Tags\Group;
 use PhpHelper\Form\Tags\FormClose;
 use PhpHelper\Form\Tags\FormOpen;
 use PhpHelper\Form\Tags\Input;

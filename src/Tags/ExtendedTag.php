@@ -13,7 +13,8 @@ use PhpHelper\Form\Enums\InputEnum;
 class ExtendedTag extends BaseTag implements TagInterface
 {
     protected $defaultValue = null;
-    protected $data;
+    protected $isSettedData = false;
+    protected $data = null;
     protected $skipBind = false;
 
     public function setDefaultValue($value)
@@ -30,7 +31,6 @@ class ExtendedTag extends BaseTag implements TagInterface
     public function setName($name)
     {
         $this->setAttribute(InputEnum::ATTR_NAME, $name);
-        $this->bindValue();
         return $this;
     }
 
@@ -79,14 +79,22 @@ class ExtendedTag extends BaseTag implements TagInterface
 
     protected function bindValue(): void
     {
+        if (!is_null($this->defaultValue)) {
+            $this->attributes[InputEnum::ATTR_VALUE] = $this->defaultValue;
+        }
+
         if ($this->isSkipBind()) {
             return;
         }
 
         if (!is_null($tagData = $this->getTagData())) {
             $this->attributes[InputEnum::ATTR_VALUE] = $tagData;
-        } elseif (!is_null($this->defaultValue)) {
-            $this->attributes[InputEnum::ATTR_VALUE] = $this->defaultValue;
         }
+    }
+
+    public function build(): string
+    {
+        $this->bindValue();
+        return parent::build();
     }
 }

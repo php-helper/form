@@ -14,12 +14,12 @@ class BaseGroup implements TagInterface
 
     private $data;
     private $name;
-    private $itemClass;
+    private $itemClassName;
     private $items = [];
 
-    public function __construct(string $itemClass, string $name)
+    public function __construct(string $itemClassName, string $name)
     {
-        $this->itemClass = $itemClass;
+        $this->itemClassName = $itemClassName;
         $this->name = $name;
     }
 
@@ -50,7 +50,7 @@ class BaseGroup implements TagInterface
     public function addItem()
     {
         /** @var BaseCheckInput $object */
-        $object = new $this->itemClass();
+        $object = new $this->itemClassName();
         $object->setData($this->getData());
         $object->setName($this->name);
         $this->items[] = $object;
@@ -66,9 +66,9 @@ class BaseGroup implements TagInterface
     public function build(): string
     {
         $html = '';
-        foreach ($this->items as $radio) {
-            /** @var Radio $radio */
-            $html .= $radio->build();
+        foreach ($this->items as $item) {
+            /** @var Radio $item */
+            $html .= $item->build();
         }
         return $html;
     }
